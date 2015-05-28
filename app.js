@@ -1,3 +1,6 @@
+
+/* PAQUETES CON MIDDLEWARES */
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,17 +8,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/* ENRUTADORES */
+
 var routes = require('./routes/index');
-var users = require('./routes/users');
+
+/* CREAR APLICACIÓN */
 
 var app = express();
 
-// view engine setup
+/* GENERADOR DE VISTAS */
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+/* INSTALACIÓN DE MIDDLEWARES */
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,20 +31,21 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+/* INSTALACIÓN DE ENRUTADORES */
 
-// catch 404 and forward to error handler
+app.use('/', routes);
+
+/* GESTIÓN DEL RESTO DE RUTAS */
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
+/* GESTIÓN DE ERRORES */
 
-// development error handler
-// will print stacktrace
+
+// Errores durante desarrollo (con trazas)
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -47,8 +56,7 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// Errores en producción (sin trazas)
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -57,5 +65,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
+/* EXPORTA APP PARA EL COMANDO DE ARRNQUE */
 
 module.exports = app;
