@@ -44,7 +44,6 @@ app.use(function(req, res, next) {
 
 /* GESTIÓN DE ERRORES */
 
-
 // Errores durante desarrollo (con trazas)
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -65,6 +64,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-/* EXPORTA APP PARA EL COMANDO DE ARRNQUE */
+/* EXPORTA APP PARA EL COMANDO DE ARRANQUE */
 
 module.exports = app;
