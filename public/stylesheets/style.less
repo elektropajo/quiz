@@ -1,8 +1,45 @@
+// out: ../css/style.css, sourcemap: true, compress: true
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    display: inline;
+    a {
+      padding: 10px;
+    }
+  }
+}
+
+.header, .nav, section, footer {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.header, footer {
+  background: #ccc;
+  padding: 50px 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+section {
+  border: 2px solid #ccc;
+  padding: 15px;
 }
