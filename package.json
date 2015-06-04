@@ -18,6 +18,8 @@
     "express-partials": "^0.3.0",
     "less-middleware": "1.0.x",
     "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0"
+    "sequelize": "^1.7.0",
+    "serve-favicon": "~2.2.0",
+    "sqlite3": "^3.0.8"
   }
 }
