@@ -7,7 +7,7 @@
 <% var i; for (i=0; i < quizes.length; i++) { %>
   <article>
     <a href="quizes/<%= quizes[i].id %>">
-      <h2><%= quizes[i].pregunta %></h2>
+      <h2><%= quizes[i].tema + ': ' + quizes[i].pregunta %></h2>
     </a>
     <a href="quizes/<%= quizes[i].id %>/edit">
       <button type="button">Editar</button>

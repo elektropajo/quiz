@@ -4,5 +4,14 @@
 <label for="resp">Respuesta</label>
 <input type="text" id="resp" name="quiz[respuesta]" placeholder="<%= quiz.respuesta %>" />
 
+<label for="resp">Tema</label>
+<select type="text" id="tema" name="quiz[tema]" placeholder="<%= quiz.respuesta %>">
+  <option value="ciencia">Ciencia</option>
+  <option value="humanidades">Humanidades</option>
+  <option value="ocio">Ocio</option>
+  <option value="tecnologia">Tecnología</option>
+  <option value="otro" selected>Otro</option>
+</select>
+
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Guardar" />
