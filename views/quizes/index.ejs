@@ -5,6 +5,16 @@
 <h2><%= search %></h2>
 
 <% var i; for (i=0; i < quizes.length; i++) { %>
-  <article><a href="quizes/<%= quizes[i].id %>"><h2><%= quizes[i].pregunta %></h2></a></article>
+  <article>
+    <a href="quizes/<%= quizes[i].id %>">
+      <h2><%= quizes[i].pregunta %></h2>
+    </a>
+    <a href="quizes/<%= quizes[i].id %>/edit">
+      <button type="button">Editar</button>
+    </a>
+    <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+      <button type="submit" onClick="return confirm('¿Borrar <%= quizes[i].pregunta %>?')">Borrar</button>
+    </form>
+  </article>
 <% } %>
 <a href="/quizes/new"><button type="button">Crear pregunta</button></a>
