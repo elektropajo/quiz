@@ -26,6 +26,16 @@
         </ul>
       </nav>
       <section>
+        <% if (typeof errors !== 'undefined' && errors) { %>
+          <div id="err">
+            Error:<br/>
+            <ul>
+            <% for (var i in errors) { %>
+              <li><%= errors[i].message %> </li>
+            <% } %>
+            </ul>
+          </div>
+        <% } %>
         <%- body %>
       </section>
       <footer>
