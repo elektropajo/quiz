@@ -44,8 +44,25 @@ exports.show = function(req, res) {
 // GET /quizes/:id/answer
 exports.answer = function(req, res) {
   var resultado = 'Incorrecto';
-  if (req.query.respuesta.toLowerCase === req.quiz.respuesta.toLowerCase) {
+  if (req.query.respuesta.toLowerCase() === req.quiz.respuesta.toLowerCase()) {
     resultado = 'Correcto';
   }
   res.render('quizes/answer', { quiz: req.quiz, respuesta: resultado });
 };
+
+// GET /quizes/new
+exports.new = function (req, res) {
+  var quiz = models.Quiz.build( // crea objeto quiz
+    { pregunta: "Pregunta", respuesta: "Respuesta" }
+  );
+  res.render('quizes/new', {quiz: quiz});
+}
+
+// POST /quizes/create
+exports.create = function (req, res) {
+  var quiz = models.Quiz.build( req.body.quiz );
+  // guarda los campos en la BBDD
+  quiz.save({fields: ["pregunta", "respuesta"]}).then(function() {
+    res.redirect('/quizes');
+  });
+}
