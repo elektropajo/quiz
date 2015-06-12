@@ -30,15 +30,27 @@ var sequelize = new Sequelize(  DB_name,
 // Importar la definición de la tabla Quiz en quiz.js
 var quiz_path = path.join(__dirname, 'quiz');
 var Quiz = sequelize.import(quiz_path);
-// Exportar definición de tabla Quiz
+
+// Importar la definición de la tabla Comments en comments.js
+var comment_path = path.join(__dirname, 'comment');
+var Comment = sequelize.import(comment_path);
+
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
+// Exportar definición de tablas
 exports.Quiz = Quiz;
+exports.Comment = Comment;
 
 // sequelize.sync() crea e inicializa la tabla de preguntas de la BBDD
-sequelize.sync().then(function() {
-  // then(...) ejecuta el manejador una vez creada la tabla
-  Quiz.count().then(function(count) {
-    if (count === 0) { //la tabla se inicializa sólo si está vacía
-      Quiz
+sequelize
+  .sync()
+  .then(function() { // then(...) ejecuta el manejador una vez creada la tabla
+    Quiz
+    .count()
+    .then(function(count) {
+      if (count === 0) { //la tabla se inicializa sólo si está vacía
+        Quiz
         .bulkCreate([{  pregunta: 'Capital de Italia',
                         respuesta: 'Roma',
                         tema: 'humanidades'
@@ -50,6 +62,6 @@ sequelize.sync().then(function() {
         .then(function() {
           console.log('Base de datos inicializada.');
         });
-    };
-  });
+      };
+    });
 });

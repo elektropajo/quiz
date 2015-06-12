@@ -1,6 +1,4 @@
-
 /* PAQUETES CON MIDDLEWARES */
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,22 +9,18 @@ var partials = require('express-partials'); //añadido
 var methodOverride = require('method-override'); //añadido
 
 /* ENRUTADORES */
-
 var routes = require('./routes/index');
 
 /* CREAR APLICACIÓN */
-
 var app = express();
 
 /* GENERADOR DE VISTAS */
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(partials());
 
 /* INSTALACIÓN DE MIDDLEWARES */
-
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -37,7 +31,6 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* INSTALACIÓN DE ENRUTADORES */
-
 app.use('/', routes);
 
 /* GESTIÓN DEL RESTO DE RUTAS */
@@ -48,7 +41,6 @@ app.use(function(req, res, next) {
 });
 
 /* GESTIÓN DE ERRORES */
-
 // Errores durante desarrollo (con trazas)
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -70,5 +62,4 @@ app.use(function(err, req, res, next) {
 });
 
 /* EXPORTA APP PARA EL COMANDO DE ARRANQUE */
-
 module.exports = app;
