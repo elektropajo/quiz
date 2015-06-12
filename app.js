@@ -43,6 +43,24 @@ app.use(function(req, res, next) {
   next();
 });
 
+// MW de autoLogout
+app.use(function(req, res, next){
+  if (req.session.user) {
+    var now = new Date();
+    var expire = req.session.expire || 0;
+    if ( expire !== 0 && expire < now ) {
+      delete req.session.user;
+      delete req.session.expire;
+      res.redirect(req.session.redir.toString());
+    } else {
+      expire = now.getTime();
+      expire += 60000; //2min = 60000ms
+      req.session.expire = expire;
+    }
+  }
+  next();
+});
+
 /* INSTALACIÓN DE ENRUTADORES */
 app.use('/', routes);
 
