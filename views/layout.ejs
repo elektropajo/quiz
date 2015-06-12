@@ -16,6 +16,11 @@
   <body>
     <div class="container">
       <header class="header">
+        <% if (!session.user) { %>
+          <span class="right"><a href="/login">Login</a></span>
+        <% } else { %>
+          <span class="right"> <%= session.user.username %> <a href="/logout">Logout</a></span>
+        <% } %>
         <h2>Quiz, el juego de las preguntas</h2>
       </header>
       <nav class="nav" role="navigation">
@@ -26,7 +31,7 @@
         </ul>
       </nav>
       <section>
-        <% if (typeof errors !== 'undefined' && errors.length!==0) { %>
+        <% if (typeof errors !== 'undefined' && errors.length!==0 && errors) { %>
           <div id="err">
             Error:<br/>
             <ul>

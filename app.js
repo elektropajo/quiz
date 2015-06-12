@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials'); //añadido
 var methodOverride = require('method-override'); //añadido
+var session = require('express-session'); //añadido
 
 /* ENRUTADORES */
 var routes = require('./routes/index');
@@ -25,10 +26,22 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('Quiz2015')); // Semilla 'Quiz 2015' para cifrar cookie
+app.use(session());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+/* HELPERS DINÁMICOS añadidos junto al middleware de sesión */
+app.use(function(req, res, next) {
+  // Guarda path en session.redir para después de login
+  if (!req.path.match(/\/login|\/logout/)) {
+    req.session.redir = req.path;
+  }
+  // Hacer visible req.session en las VISTAS
+  res.locals.session = req.session;
+  next();
+});
 
 /* INSTALACIÓN DE ENRUTADORES */
 app.use('/', routes);
