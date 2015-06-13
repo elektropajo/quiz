@@ -34,6 +34,8 @@ router.get('/quizes/:quizId(\\d+)/comments/new',  commentController.new     );
 router.post('/quizes/:quizId(\\d+)/comments',     commentController.create  );
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish );
 
+
+router.get('/quizes/statics',                quizController.statics        );
 router.get('/author', function(req, res) {  res.render('author'); }         );
 
 module.exports = router;

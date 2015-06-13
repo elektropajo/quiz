@@ -106,3 +106,24 @@ exports.destroy = function(req, res) {
   .then(  function()      { res.redirect('/quizes');  })
   .catch( function(error) { next(error);              });
 }
+
+// GET /quizes/statics
+exports.statics = function(req, res) {
+  models.Quiz.count().then(function (quizes) {
+    models.Comment.findAndCountAll().then(function (comments) {
+      var arr = [], comQuizes = 0, prev = 0;
+      for (index in comments.rows) {
+        arr[index] = comments.rows[index].QuizId;
+      }
+      arr.sort();
+      for (index in arr) {
+        if (arr[index] !== prev) { prev = arr[index]; comQuizes += 1; }
+      }
+      res.render('quizes/statics.ejs', {
+        staticsQ: quizes,
+        staticsC: comments.count,
+        staticsQC: comQuizes
+      });
+    });
+  });
+};
