@@ -31,3 +31,5 @@ npm-debug.log
 
 quiz.sqlite
 .env
+certs
+certs/*
